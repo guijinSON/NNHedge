@@ -37,8 +37,8 @@ def resolve_shape(vector):
 def plot_PnL(X, Y, epoch, PATH=None, MODEL_NAME=None):
     plt.plot(X, Y, marker=".", linestyle='none', color = (0.0, 45/255, 106/255))
     plt.title(f"Calculated PnL at Epoch {epoch+1}")
-    plt.xlabel("S0")
-    plt.ylabel("Calculated PnL")
+   # plt.xlabel("S0")
+   # plt.ylabel("Calculated PnL")
     plt.ylim([-3, 3])
     if PATH:
         plt.savefig(f'{PATH}/{MODEL_NAME}_{epoch+1}.png')
