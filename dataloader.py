@@ -15,3 +15,6 @@ class SpanDataset(Dataset):
         Sn_1 = X[-2]
         C = self.span_C[idx]
         return X, C, Sn, Sn_1
+
+def get_dataloader(data, batch_size = 256, shuffle=True):
+    return DataLoader(data, batch_size = batch_size, shuffle = shuffle)
