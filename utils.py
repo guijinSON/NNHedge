@@ -1,3 +1,7 @@
+import torch 
+import numpy as np 
+import matplotlib.pyplot as plt
+
 @torch.no_grad()
 def plot_net_delta(model,train=False,epoch=None,PATH=None,MODEL_NAME=None):
     model.eval()
@@ -22,5 +26,10 @@ def plot_net_delta(model,train=False,epoch=None,PATH=None,MODEL_NAME=None):
         plt.legend()
     model.train()
     
-    def count_parameters(model):
-      return sum(p.numel() for p in model.parameters() if p.requires_grad)
+def count_parameters(model):
+  return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def resolve_shape(vector):
+    if len(vector.shape) == 1:
+        return torch.unsqueeze(vector,-1)
+    return vector
