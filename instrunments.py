@@ -1,5 +1,6 @@
 import math 
 import numpy as np
+import scipy.stats as stats
 import matplotlib.pyplot as plt
 
 def geometric_brownian_motion(S0=100, r=0.01,sigma=0.2, T=1, ts=30, n_path=10000):
