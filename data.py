@@ -1,4 +1,5 @@
 import torch 
+import numpy as np
 
 def sequence_to_span(X_asset, X_option, span_length = 3):
     X_len = len(X_asset)
