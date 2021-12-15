@@ -34,7 +34,7 @@ def resolve_shape(vector):
         return torch.unsqueeze(vector,-1)
     return vector
 
-def plot_PnL(X, Y, PATH=None, MODEL_NAME=None):
+def plot_PnL(X, Y, epoch, PATH=None, MODEL_NAME=None):
     plt.plot(X, Y, marker=".", linestyle='none', color = (0.0, 45/255, 106/255))
     plt.title(f"Calculated PnL at Epoch {epoch+1}")
     plt.xlabel("S0")
