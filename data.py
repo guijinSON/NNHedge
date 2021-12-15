@@ -11,8 +11,8 @@ def generate_span_dataset(X_asset, X_option, span_length = 3):
     span_call =[]
     for Xa,Xo in zip(X_asset, X_option):
         data = sequence_to_span(Xa, Xo, span_length = span_length)
-        span = torch.from_numpy(data[0])
-        option = torch.from_numpy(data[1])
+        span = torch.tensor(data[0])
+        option = torch.tensor(data[1])
         asset_span.extend(span)
         span_call.extend(option)
     return asset_span, span_call
