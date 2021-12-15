@@ -41,5 +41,5 @@ def plot_PnL(X, Y, epoch, PATH=None, MODEL_NAME=None):
     plt.ylabel("Calculated PnL")
     plt.ylim([-3, 3])
     if PATH:
-        plt.savefig(f'{PATH}/{MODEL_NAME}_{epoch+1}.png', bbox_inches=extent))
+        plt.savefig(f'{PATH}/{MODEL_NAME}_{epoch+1}.png', bbox_inches=extent)
         plt.clf()
