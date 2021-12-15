@@ -1,3 +1,5 @@
+import torch 
+
 def sequence_to_span(X_asset, X_option, span_length = 3):
     X_len = len(X_asset)
     asset_span = [X_asset[n:n+span_length] for n in range(X_len) if n < X_len - span_length +1 ] 
