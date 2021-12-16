@@ -1,10 +1,8 @@
 import torch 
 import torch.nn as nn
 
-span_length = 3
-
 class MLPNet(nn.Module):
-    def __init__(self):
+    def __init__(self, span_length):
         super(MLPNet, self).__init__()
         self.lin1 = nn.Linear(span_length, 32)
         self.tanh1 = nn.Tanh()
