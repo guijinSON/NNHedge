@@ -14,9 +14,11 @@ class MLPNet(nn.Module):
 
         self.lin3 = nn.Linear(4,1)
         self.tanh = nn.Tanh()
+        
+        self.span_length = span_length
 
     def forward(self, X):
-        X = torch.add(X,torch.tensor([0,1,2]))
+        X = torch.add(X,torch.range(start=0,end=self.span_length-1,step=1))
         X = self.tanh1(self.lin1(X))
         X = self.tanh2(self.lin2(X))
         out = self.tanh(self.lin3(X))
@@ -109,9 +111,11 @@ class AttentionNet(nn.Module):
 
         self.FFN = nn.Linear(10,1)
         self.tanh = nn.Tanh()
+        
+        self.span_length = span_length
     
     def forward(self,X):
-        X = torch.add(X,torch.tensor([0,1,2]))
+        X = torch.add(X,torch.range(start=0,end=self.span_length-1,step=1))
 
         q = self.query(X)
         v = self.query(X)
