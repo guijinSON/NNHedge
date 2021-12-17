@@ -1,3 +1,6 @@
+import torch
+from utils import resolve_shape
+
 def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_type:str):
     running_loss = 0.0 
     if model_type not in ['RNN','TCN','ATTENTION','MLP']:
@@ -6,13 +9,11 @@ def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_ty
     model.train()
     for i, data in enumerate(trainloader):
         span, C, Sn, Sn_1 = data
-        print(span.shape)
         if model_type == 'RNN' or model_type =='TCN':
             span = resolve_shape(span)
             C    = resolve_shape(C)
             Sn   = resolve_shape(Sn)
             Sn_1 = resolve_shape(Sn_1)
-        print(span.shape)
         optimizer.zero_grad()
 
         outputs = model(span)
