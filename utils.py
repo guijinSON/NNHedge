@@ -1,6 +1,7 @@
 import torch 
 import numpy as np 
 import matplotlib.pyplot as plt
+from instrunments import geometric_brownian_motion, price_call_BS, delta_call_BS
 
 @torch.no_grad()
 def plot_net_delta(model,train=False,epoch=None,PATH=None,MODEL_NAME=None):
