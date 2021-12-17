@@ -1,4 +1,4 @@
-def single_epoch_train(model, optimizer, trainloader, loss_func, model_type:str):
+def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_type:str):
     running_loss = 0.0 
     if model_type not in ['RNN','TCN','ATTENTION','MLP']:
         raise ValueError('Please use an available type of model. Available Models: RNN | TCN | ATTENTION |MLP')
