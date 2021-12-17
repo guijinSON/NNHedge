@@ -99,3 +99,24 @@ class TCN(nn.Module):
         X = self.tcn(X)[:, :, -1]
         output = self.tanh(self.linear(X))
         return output
+
+class AttentionNet(nn.Module):
+    def __init__(self, span_length):
+        super(AttentionNet, self).__init__()
+        self.query = nn.Linear(span_length,10)
+        self.value = nn.Linear(span_length,10)
+
+        self.FFN = nn.Linear(10,1)
+        self.tanh = nn.Tanh()
+    
+    def forward(self,X):
+        X = torch.add(X,torch.tensor([0,1,2]))
+
+        q = self.query(X)
+        v = self.query(X)
+
+        weight = F.softmax(q, dim=-1)
+        X = torch.mul(weight,v)
+        X = self.tanh(self.FFN(X))
+
+        return X
