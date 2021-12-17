@@ -43,3 +43,17 @@ def plot_PnL(X, Y, epoch, PATH=None, MODEL_NAME=None):
     if PATH:
         plt.savefig(f'{PATH}/{MODEL_NAME}_{epoch+1}.png', bbox_inches = 'tight')
         plt.clf()
+
+def model_to_onnx(model, model_path, span_length = 3):
+    X_asset = geometric_brownian_motion(S0, r, sigma, T, ts, n_path)
+    X_call  = price_call_BS(X_asset, K, T/ts, r, sigma)
+
+    span_X, span_C = generate_span_dataset(X_asset,X_call, span_length = span_length)
+    ds = SpanDataset(span_X,span_C)
+    trainloader = get_dataloader(ds, shuffle=True, drop_last = True)
+
+    batch = next(iter(trainloader))[0].reshape(256,-1,1)
+    yhat = net(batch)
+    input_names = ['SPAN']
+    output_names = ['Delta']
+    torch.onnx.export(net, batch, f'{model_path}.onnx', input_names=input_names, output_names=output_names)
