@@ -1,7 +1,7 @@
 import torch
 from NNHedge.utils import resolve_shape
 
-def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_type:str):
+def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_type:str, K=100):
     running_loss = 0.0 
     if model_type not in ['RNN','TCN','ATTENTION','MLP']:
         raise ValueError('Please use an available type of model. Available Models: RNN | TCN | ATTENTION |MLP')
