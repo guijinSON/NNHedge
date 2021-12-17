@@ -1,5 +1,5 @@
 import torch
-from utils import resolve_shape
+from NNHedge.utils import resolve_shape
 
 def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_type:str):
     running_loss = 0.0 
