@@ -26,6 +26,7 @@ def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_ty
 
     print('[%d] loss: %.6f' % (epoch + 1, running_loss))   
 
+@torch.no_grad()
 def single_epoch_test(model, testloader, model_type:str, K=100):
     y_val = []
     for i, data in enumerate(testloader):
