@@ -24,3 +24,18 @@ def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_ty
         running_loss += loss.item()
 
     print('[%d] loss: %.6f' % (epoch + 1, running_loss))   
+
+  def single_epoch_test(model, testloader, model_type:str, K=100):
+    y_val = []
+    for i, data in enumerate(testloader):
+        span, C, Sn, Sn_1 = data
+        if model_type == 'RNN' or model_type =='TCN':
+            span = resolve_shape(span)
+        C    = resolve_shape(C)
+        Sn   = resolve_shape(Sn)
+        Sn_1 = resolve_shape(Sn_1)
+        output = model(span)
+        output = output * (Sn - Sn_1) - C + torch.max(Sn - K, torch.zeros(100, 1))
+
+        y_val.extend(output.detach().tolist())
+    return np.array(y_val).reshape(-1)
