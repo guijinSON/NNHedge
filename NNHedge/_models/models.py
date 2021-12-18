@@ -5,7 +5,7 @@ from torch.nn.utils import weight_norm
 
 class SpanMLP(nn.Module):
     def __init__(self, span_length):
-        super(MLPNet, self).__init__()
+        super(SpanMLP, self).__init__()
         self.lin1 = nn.Linear(span_length, 32)
         self.tanh1 = nn.Tanh()
 
