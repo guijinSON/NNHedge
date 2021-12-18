@@ -11,7 +11,7 @@ def single_epoch_train(model, optimizer, trainloader, loss_func, epoch, model_ty
     for i, data in enumerate(trainloader):
         span, C, Sn, Sn_1 = data
         if model_type == 'RNN' or model_type =='TCN':
-            span = resolve_shape(span)
+            span = torch.unsqueeze(span,-1)
         C    = resolve_shape(C)
         Sn   = resolve_shape(Sn)
         Sn_1 = resolve_shape(Sn_1)
