@@ -1,3 +1,6 @@
+import torch
+import pandas as pd
+
 def entropic_loss(pnl):
     pnl = torch.tensor(pnl)
     return -torch.mean(-torch.exp(-pnl)).numpy()
