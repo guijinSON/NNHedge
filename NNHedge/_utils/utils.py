@@ -71,7 +71,7 @@ def extract_weight(model,testloader):
         for span in data:
             X = net.query(span)
             weight = F.softmax(X).reshape(-1,1)
-            weighted_layer = net.query.weight.detach() * weight
+            weighted_layer = net.value.weight.detach() * weight
             sum = torch.sum(weighted_layer,dim=0).detach().numpy()
             total_weight.append(sum)
     total_weight = torch.tensor(total_weight)
