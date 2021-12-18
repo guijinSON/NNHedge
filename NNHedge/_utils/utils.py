@@ -1,6 +1,10 @@
 import torch 
 import numpy as np 
 import matplotlib.pyplot as plt
+from ._instrunments.instrunments import geometric_brownian_motion, price_call_BS
+from ._utils.data import generate_span_dataset
+from ._train.datalaoder import SpanDataset, get_datalaoder
+
 
 @torch.no_grad()
 def plot_net_delta(model,train=False,epoch=None,PATH=None,MODEL_NAME=None):
@@ -44,7 +48,7 @@ def plot_PnL(X, Y, epoch, PATH=None, MODEL_NAME=None):
         plt.savefig(f'{PATH}/{MODEL_NAME}_{epoch+1}.png', bbox_inches = 'tight')
         plt.clf()
 
-def model_to_onnx(model, model_path, span_length = 3):
+def model_to_onnx(model, span_length=3, S0=100, r=0.02, sigma=0.2, T=1, ts=1/22, n_path=10000 ):
     X_asset = geometric_brownian_motion(S0, r, sigma, T, ts, n_path)
     X_call  = price_call_BS(X_asset, K, T/ts, r, sigma)
 
@@ -52,8 +56,8 @@ def model_to_onnx(model, model_path, span_length = 3):
     ds = SpanDataset(span_X,span_C)
     trainloader = get_dataloader(ds, shuffle=True, drop_last = True)
 
-    batch = next(iter(trainloader))[0].reshape(256,-1,1)
+    batch = next(iter(trainloader))[0].reshape(256,-1)
     yhat = net(batch)
     input_names = ['SPAN']
     output_names = ['Delta']
-    torch.onnx.export(net, batch, f'{model_path}.onnx', input_names=input_names, output_names=output_names)
+    torch.onnx.export(net, batch, 'model.onnx', input_names=input_names, output_names=output_names)
