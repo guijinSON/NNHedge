@@ -32,7 +32,7 @@ def single_epoch_test(model, testloader, model_type:str, K=100):
     for i, data in enumerate(testloader):
         span, C, Sn, Sn_1 = data
         if model_type == 'RNN' or model_type =='TCN':
-            span = resolve_shape(span)
+            span = torch.unsqueeze(span,-1)
         C    = resolve_shape(C)
         Sn   = resolve_shape(Sn)
         Sn_1 = resolve_shape(Sn_1)
