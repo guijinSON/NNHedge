@@ -125,3 +125,18 @@ class AttentionNet(nn.Module):
         X = self.tanh(self.FFN(X))
 
         return X
+
+def get_model(MODEL_TYPE:str, span_length:int):
+    if MODEL_TYPE not in ['SpanMLP','RNN','TCN','ATTENTION']:
+        raise ValueError("Invalid Model Type.")
+
+    if MODEL_TYPE == 'SpanMLP':
+        model = SpanMLP(span_length)
+    elif MODEL_TYPE =='RNN':
+        model = RNNNet()
+    elif MODEL_TYPE =='TCN':
+        model = TCN(span_length,1,[5])
+    elif MODEL_TYPE =='ATTENTION':
+        model = AttentionNet(span_length)
+
+    return model 
