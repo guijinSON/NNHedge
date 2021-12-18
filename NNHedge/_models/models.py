@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils import weight_norm
 
-class MLPNet(nn.Module):
+class SpanMLP(nn.Module):
     def __init__(self, span_length):
         super(MLPNet, self).__init__()
         self.lin1 = nn.Linear(span_length, 32)
