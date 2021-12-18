@@ -61,3 +61,18 @@ def model_to_onnx(model, span_length=3, S0=100, r=0.02, sigma=0.2, T=1, ts=1/22,
     input_names = ['SPAN']
     output_names = ['Delta']
     torch.onnx.export(net, batch, 'model.onnx', input_names=input_names, output_names=output_names)
+
+    
+@torch.no_grad()
+def extract_weight(model,testloader):
+    total_weight = []
+    for data in testloader:
+        data = data[0]
+        for span in data:
+            X = net.query(span)
+            weight = F.softmax(X).reshape(-1,1)
+            weighted_layer = net.query.weight.detach() * weight
+            sum = torch.sum(weighted_layer,dim=0).detach().numpy()
+            total_weight.append(sum)
+    total_weight = torch.tensor(total_weight)
+    return F.softmax(torch.mean(total_weight,dim=0))
