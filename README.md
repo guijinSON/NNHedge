@@ -13,6 +13,14 @@ To build and develop from source, clone this repository via
 ```python
 git clone https://github.com/guijinSON/NNHedge.git
 ```
+
+## Quick Start
+To follow along the code snippets below, we recommend that you refer to the [Colab notebook](https://colab.research.google.com/drive/1V_amf3vilYtUh7TeiJPAZiibtehNNHOq?usp=sharing).
+
+```python
+git clone https://github.com/guijinSON/NNHedge.git
+```
+
 ## Citation 
 You can cite our work by:
 ```bibtex
